@@ -43,7 +43,7 @@ class u2GAN(object):
         # self.output_target_node_batch = tf.nn.dropout(self.output_target_node_batch, keep_prob=self.dropout_keep_prob)
 
         with tf.name_scope("embedding"):
-            self.embedding_matrix = tf.get_variable(
+            self.embedding_matrix = tf.compat.v1.get_variable(
                     "W", shape=[vocab_size, feature_dim_size], initializer=tf.contrib.layers.xavier_initializer())
 
             self.softmax_biases = tf.Variable(tf.zeros([vocab_size]))

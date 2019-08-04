@@ -189,7 +189,7 @@ with tf.Graph().as_default():
                 x_batch, y_batch = batch_nodes()
                 loss += train_step(x_batch, y_batch)
                 # current_step = tf.compat.v1.train.global_step(sess, global_step)
-            # print(loss)
+            print(loss)
 
             # It will give tensor object
             node_embeddings = graph.get_tensor_by_name('W:0')
