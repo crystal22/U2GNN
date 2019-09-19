@@ -1,4 +1,4 @@
-# U2GAN
+# U2GAN: Unsupervised Universal Self-Attention Network for Graph Classification
 
 python train_u2GAN_noPOS.py --dataset COLLAB --batch_size 512 --ff_hidden_size 1024 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.00005 --model_name COLLAB_bs512_dro05_1024_8_idx0_4_3
 
