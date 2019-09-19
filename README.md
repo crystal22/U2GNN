@@ -26,7 +26,7 @@ U2GAN is free for non-commercial use and distributed under the Creative Commons 
 - LIBLINEAR https://www.csie.ntu.edu.tw/~cjlin/liblinear/
 
 ### Training
-Examples to run the program:
+Command examples to run the program:
 
 	$ python train_u2GAN_noPOS.py --dataset COLLAB --batch_size 512 --ff_hidden_size 1024 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.00005 --model_name COLLAB_bs512_dro05_1024_8_idx0_4_3
 	
@@ -39,8 +39,6 @@ Examples to run the program:
 `--batch_size`: The batch size.
 
 `--dataset`: Name of dataset.
-
-`--num_sampled`: The number of samples for the sampled softmax loss function.
 
 `--num_epochs`: The number of training epochs.
 
