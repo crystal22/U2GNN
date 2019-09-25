@@ -2,10 +2,10 @@
 
 This program provides the implementation of our unsupervised graph embedding model U2GAN as described in [the paper]():
 
-        @InProceedings{Nguyen2019U2GAN,
+        @article{Nguyen2019U2GAN,
           author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
           title={{Unsupervised Universal Self-Attention Network for Graph Classification}},
-          booktitle={...},
+          journal={arXiv preprint arXiv:},
           year={2019}
           }
   
