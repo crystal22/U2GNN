@@ -5,7 +5,7 @@ This program provides the implementation of our unsupervised graph embedding mod
         @article{Nguyen2019U2GAN,
           author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
           title={{Unsupervised Universal Self-Attention Network for Graph Classification}},
-          journal={arXiv preprint arXiv:},
+          journal={arXiv preprint arXiv:1909.11855},
           year={2019}
           }
   
