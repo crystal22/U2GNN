@@ -21,7 +21,7 @@ U2GAN is free for non-commercial use and distributed under the Creative Commons 
 
 ### Requirements
 - Python 3
-- Tensorflow >= 1.6
+- Tensorflow >= 1.13
 - Tensor2tensor >= 1.9
 - LIBLINEAR https://www.csie.ntu.edu.tw/~cjlin/liblinear/
 
