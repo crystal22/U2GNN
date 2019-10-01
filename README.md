@@ -26,7 +26,7 @@ U2GAN is free for non-commercial use and distributed under the Creative Commons 
 - LIBLINEAR https://www.csie.ntu.edu.tw/~cjlin/liblinear/
 
 ### Training
-Command examples to run the program:
+Commands to run the program:
 
 	$ git clone https://github.com/cjlin1/liblinear.git
 	
