@@ -32,6 +32,8 @@ Command examples to run the program:
 	
 	$ cd liblinear
 	
+	liblinear$ make
+	
 	liblinear$ git clone https://github.com/daiquocnguyen/U2GAN.git
 	
 	liblinear$ cd U2GAN
