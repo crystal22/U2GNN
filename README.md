@@ -58,8 +58,8 @@ Commands to run the program:
 
 **Notes:**
 
-See command examples in command_examples.txt.
+See command examples in `command_examples.txt`.
 
-Only use train_u2GAN_noPOS_REDDIT.py and eval_REDDIT.py for a large collection of graphs such as REDDIT when having OOM or problems with Tensorflow. See reddit_commands.txt. 
+Only use `train_u2GAN_noPOS_REDDIT.py` and `eval_REDDIT.py` for a large collection of graphs such as REDDIT when having OOM or problems with Tensorflow. See reddit_commands.txt. 
 
-Only use train_u2GAN.py for MUTAG and PROTEIN.
+Only use `train_u2GAN.py` for MUTAG and PROTEIN.
