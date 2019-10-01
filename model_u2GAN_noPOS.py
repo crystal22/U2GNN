@@ -26,7 +26,7 @@ class u2GAN(object):
         self.hparams.batch_size = hparams_batch_size * seq_length
         self.hparams.max_length = seq_length
         self.hparams.num_hidden_layers = num_hidden_layers
-        self.hparams.num_heads = 1 #due to the fact that the feature embedding sizes in all datasets are different
+        self.hparams.num_heads = 1 #due to the fact that the feature embedding sizes are various
         self.hparams.filter_size = ff_hidden_size
         self.hparams.use_target_space_embedding = False
 
