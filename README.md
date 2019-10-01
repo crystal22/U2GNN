@@ -56,7 +56,7 @@ Command examples to run the program:
 
 `--num_hidden_layers`: The number T of timesteps.
 
-### Notes:
+**Notes:**
 
 See command examples in command_examples.txt.
 
