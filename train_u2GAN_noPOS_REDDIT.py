@@ -117,7 +117,6 @@ print(X_concat.shape)
 feature_dim_size = X_concat.shape[1]
 vocab_size = X_concat.shape[0]
 num_nodes = sum([len(graph.g) for graph in graphs])
-hparams_batch_size = int(num_nodes/len(graphs)) + 1
 
 class Batch_Loader(object):
     def __init__(self):
@@ -149,7 +148,7 @@ with tf.Graph().as_default():
         global_step = tf.Variable(0, name="global_step", trainable=False)
         u_2_gan = u2GAN(num_hidden_layers=args.num_hidden_layers,
                       vocab_size=vocab_size,
-                      hparams_batch_size=hparams_batch_size,
+                      hparams_batch_size=args.batch_size,
                       num_sampled=args.num_sampled,
                       initialization=X_concat,
                       feature_dim_size=feature_dim_size,
