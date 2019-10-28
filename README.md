@@ -26,7 +26,8 @@ U2GAN is free for non-commercial use and distributed under the Creative Commons 
 - LIBLINEAR https://www.csie.ntu.edu.tw/~cjlin/liblinear/
 
 ### Training
-Commands to run the program:
+
+Regarding the unsupervised U2GAN:
 
 	$ git clone https://github.com/cjlin1/liblinear.git
 	
@@ -39,8 +40,6 @@ Commands to run the program:
 	liblinear$ cd U2GAN
 	
 	U2GAN$ unzip dataset.zip
-	
-Regarding the unsupervised U2GAN:
 
 	U2GAN$ python train_u2GAN_noPOS.py --dataset COLLAB --batch_size 512 --ff_hidden_size 1024 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.00005 --model_name COLLAB_bs512_dro05_1024_8_idx0_4_3
 	
@@ -63,6 +62,8 @@ Regarding the supervised U2GAN:
 `--num_epochs`: The number of training epochs.
 
 `--num_hidden_layers`: The number T of timesteps.
+
+`--fold_idx`: The index of fold in 10-fold validation.
 
 **Notes:**
 
