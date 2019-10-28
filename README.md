@@ -68,4 +68,4 @@ Regarding the supervised U2GAN:
 
 See command examples in `command_examples.txt` and `u2GAN_scripts.zip` for the unsupervised U2GAN; and `u2GAN_scripts_NoPOS_Supervised.zip` for the supervised U2GAN.
 
-Only use `train_u2GAN_noPOS_REDDIT.py` and `eval_REDDIT.py` for a large collection of graphs such as REDDIT if having OOM or problems with Tensorflow when running `train_u2GAN_noPOS.py`. See reddit_commands.txt. 
+Only use `train_u2GAN_noPOS_REDDIT.py` and `eval_REDDIT.py` for a large collection of graphs such as REDDIT if having OOM or problems with Tensorflow when running `train_u2GAN_noPOS.py`. See `reddit_commands.txt`. 
