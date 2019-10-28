@@ -39,10 +39,18 @@ Commands to run the program:
 	liblinear$ cd U2GAN
 	
 	U2GAN$ unzip dataset.zip
+	
+Regarding the unsupervised U2GAN:
 
 	U2GAN$ python train_u2GAN_noPOS.py --dataset COLLAB --batch_size 512 --ff_hidden_size 1024 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.00005 --model_name COLLAB_bs512_dro05_1024_8_idx0_4_3
 	
 	U2GAN$ python train_u2GAN_noPOS.py --dataset DD --batch_size 512 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_hidden_layers 3 --learning_rate 0.00005 --model_name DD_bs512_dro05_1024_4_idx0_3_3
+
+Regarding the supervised U2GAN:
+
+	U2GAN$ python train_U2GAN_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_dro05_1024_8_idx0_4_1
+	
+	U2GAN$ python train_U2GAN_Sup.py --dataset MUTAG --batch_size 4 --degree_as_tag --ff_hidden_size 1024 --fold_idx 7 --num_neighbors 16 --num_sampled 512 --num_epochs 50 --num_hidden_layers 5 --learning_rate 0.0005 --model_name MUTAG_bs4_fold7_dro05_1024_16_idx0_5_1
 	
 **Parameters:** 
 
@@ -58,8 +66,6 @@ Commands to run the program:
 
 **Notes:**
 
-See command examples in `command_examples.txt`.
+See command examples in `command_examples.txt` and `u2GAN_scripts.zip` for the unsupervised U2GAN; and `u2GAN_scripts_NoPOS_Supervised.zip` for the supervised U2GAN.
 
 Only use `train_u2GAN_noPOS_REDDIT.py` and `eval_REDDIT.py` for a large collection of graphs such as REDDIT if having OOM or problems with Tensorflow when running `train_u2GAN_noPOS.py`. See reddit_commands.txt. 
-
-Only use `train_u2GAN.py` for MUTAG and PROTEIN.
