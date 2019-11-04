@@ -34,20 +34,19 @@ class U2GAN(object):
 
         self.output_target_node = tf.split(self.output_UT, num_or_size_splits=seq_length, axis=1)[0]
         self.output_target_node = tf.squeeze(self.output_target_node)
-
-        # self.graph_embeddings = tf.compat.v1.matmul(self.graph_pool, self.output_target_node, a_is_sparse=True)
+        #graph pooling
         self.graph_embeddings = tf.compat.v1.matmul(self.graph_pool, self.output_target_node)
 
         # Final (unnormalized) scores and predictions
         with tf.name_scope("output"):
             W = tf.compat.v1.get_variable("W", shape=[feature_dim_size, num_classes], initializer=tf.contrib.layers.xavier_initializer())
-            b = tf.Variable(tf.constant(0.1, shape=[num_classes]), name="b")
+            b = tf.Variable(tf.zeros([num_classes]))
             self.scores = tf.compat.v1.nn.xw_plus_b(self.graph_embeddings, W, b, name="scores")
             self.predictions = tf.argmax(self.scores, 1, name="predictions")
 
         # Calculate mean cross-entropy loss
         with tf.name_scope("loss"):
-            losses = tf.compat.v1.nn.softmax_cross_entropy_with_logits_v2(logits=self.scores, labels=label_smoothing(self.one_hot_labels))
+            losses = tf.compat.v1.nn.softmax_cross_entropy_with_logits_v2(logits=self.scores, labels=self.one_hot_labels)
             self.total_loss = tf.reduce_mean(losses)
 
         # Accuracy
@@ -57,19 +56,3 @@ class U2GAN(object):
 
         self.saver = tf.compat.v1.train.Saver(tf.global_variables(), max_to_keep=500)
         tf.logging.info('Seting up the main structure')
-
-
-def label_smoothing(inputs, epsilon=0.1):
-    V = inputs.get_shape().as_list()[-1]  # number of channels
-    return ((1 - epsilon) * inputs) + (epsilon / V)
-
-def sample_gumbel(shape, eps=1e-20):
-    """Sample from Gumbel(0, 1)"""
-    U = tf.random_uniform(shape, minval=0, maxval=1)
-    return -tf.log(-tf.log(U + eps) + eps)
-
-def add_gumbel(logits, temperature):
-    """ Draw a sample from the Gumbel-Softmax distribution"""
-    y = logits + sample_gumbel(tf.shape(logits))
-    return y/temperature
-# tau = tf.Variable(1.0, name="temperature")
