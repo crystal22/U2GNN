@@ -11,10 +11,10 @@ class U2GAN(object):
         self.graph_pool = tf.compat.v1.placeholder(tf.float32, [None, None], name="graph_pool")
         self.X_concat = tf.compat.v1.placeholder(tf.float32, [None, feature_dim_size], name="X_concat")
         self.one_hot_labels = tf.compat.v1.placeholder(tf.float32, [None, num_classes], name="one_hot_labels")
+        self.dropout_keep_prob = tf.placeholder(tf.float32, name="dropout_keep_prob")
 
         #Inputs for Universal Transformer
         self.input_UT = tf.nn.embedding_lookup(self.X_concat, self.input_x)
-        self.input_UT = tf.nn.l2_normalize(self.input_UT, axis=2)
         self.input_UT = tf.reshape(self.input_UT, [-1, seq_length, 1, feature_dim_size])
 
         self.hparams = UT_NoPOS.universal_transformer_small1()
@@ -30,12 +30,13 @@ class U2GAN(object):
         #Universal Transformer Encoder
         self.ute = UT_NoPOS.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
         self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]
-        self.output_UT = tf.squeeze(self.output_UT)
+        self.output_UT = tf.squeeze(self.output_UT, axis=2)
 
         self.output_target_node = tf.split(self.output_UT, num_or_size_splits=seq_length, axis=1)[0]
-        self.output_target_node = tf.squeeze(self.output_target_node)
+        self.output_target_node = tf.squeeze(self.output_target_node, axis=1)
         #graph pooling
         self.graph_embeddings = tf.compat.v1.matmul(self.graph_pool, self.output_target_node)
+        #self.graph_embeddings = tf.nn.dropout(self.graph_embeddings, keep_prob=self.dropout_keep_prob)
 
         # Final (unnormalized) scores and predictions
         with tf.name_scope("output"):
@@ -46,7 +47,7 @@ class U2GAN(object):
 
         # Calculate mean cross-entropy loss
         with tf.name_scope("loss"):
-            losses = tf.compat.v1.nn.softmax_cross_entropy_with_logits_v2(logits=self.scores, labels=self.one_hot_labels)
+            losses = tf.compat.v1.nn.softmax_cross_entropy_with_logits_v2(logits=self.scores, labels=label_smoothing(self.one_hot_labels))
             self.total_loss = tf.reduce_mean(losses)
 
         # Accuracy
@@ -56,3 +57,7 @@ class U2GAN(object):
 
         self.saver = tf.compat.v1.train.Saver(tf.global_variables(), max_to_keep=500)
         tf.logging.info('Seting up the main structure')
+
+def label_smoothing(inputs, epsilon=0.1):
+    V = inputs.get_shape().as_list()[-1]  # number of channels
+    return ((1 - epsilon) * inputs) + (epsilon / V)

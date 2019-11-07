@@ -22,7 +22,7 @@ import statistics
 parser = ArgumentParser("U2GAN", formatter_class=ArgumentDefaultsHelpFormatter, conflict_handler='resolve')
 
 parser.add_argument("--run_folder", default="../", help="")
-parser.add_argument("--dataset", default="PTC", help="Name of the dataset.")
+parser.add_argument("--dataset", default="REDDITBINARY", help="Name of the dataset.")
 parser.add_argument("--embedding_dim", default=2, type=int, help="Dimensionality of character embedding")
 parser.add_argument("--learning_rate", default=0.0001, type=float, help="Learning rate")
 parser.add_argument("--batch_size", default=4, type=int, help="Batch Size")
@@ -36,7 +36,7 @@ parser.add_argument('--num_sampled', default=32, type=int, help='')
 parser.add_argument("--dropout_keep_prob", default=0.5, type=float, help="Dropout keep probability")
 parser.add_argument("--num_hidden_layers", default=4, type=int, help="Number of attention layers")
 parser.add_argument("--num_heads", default=1, type=int, help="Number of attention heads within each attention layer")
-parser.add_argument("--ff_hidden_size", default=1024, type=int, help="The hidden size for the feedforward layer")
+parser.add_argument("--ff_hidden_size", default=128, type=int, help="The hidden size for the feedforward layer")
 parser.add_argument("--num_neighbors", default=4, type=int, help="")
 parser.add_argument('--degree_as_tag', action="store_false", help='let the input node features be the degree of nodes (heuristics for unlabeled graph)')
 parser.add_argument('--fold_idx', type=int, default=0, help='the index of fold in 10-fold validation. 0-9.')
@@ -60,7 +60,6 @@ print(num_nodes, hparams_batch_size)
 def preprocess_neighbors_pool(batch_graph):
     edge_mat_list = []
     start_idx = [0]
-
     for i, graph in enumerate(batch_graph):
         start_idx.append(start_idx[i] + len(graph.g))
         edge_mat_list.append(graph.edge_mat + start_idx[i])
@@ -97,7 +96,6 @@ def preprocess_graphpool(batch_graph):
     return graph_pool
 
 def get_batch_data(batch_graph):
-
     X_concat = np.concatenate([graph.node_features for graph in batch_graph], 0)
     graph_pool = preprocess_graphpool(batch_graph)
 
@@ -156,7 +154,7 @@ with tf.Graph().as_default():
         grads_and_vars = optimizer.compute_gradients(u_gan.total_loss)
         train_op = optimizer.apply_gradients(grads_and_vars, global_step=global_step)
 
-        out_dir = os.path.abspath(os.path.join(args.run_folder, "runs_U2GAN_Sup", args.model_name))
+        out_dir = os.path.abspath(os.path.join(args.run_folder, "runs_U2GAN_Sup_new", args.model_name))
         print("Writing to {}\n".format(out_dir))
 
         # Checkpoint directory. Tensorflow assumes this directory already exists so we need to create it
@@ -175,6 +173,7 @@ with tf.Graph().as_default():
                 u_gan.graph_pool: graph_pool,
                 u_gan.X_concat: X_concat,
                 u_gan.one_hot_labels: one_hot_labels,
+                u_gan.dropout_keep_prob: args.dropout_keep_prob
             }
             _, step, loss = sess.run([train_op, global_step, u_gan.total_loss], feed_dict)
             return loss
@@ -185,6 +184,7 @@ with tf.Graph().as_default():
                 u_gan.graph_pool: graph_pool,
                 u_gan.X_concat: X_concat,
                 u_gan.one_hot_labels: one_hot_labels,
+                u_gan.dropout_keep_prob: 1.0
             }
             _, acc = sess.run([global_step, u_gan.accuracy], feed_dict)
             return acc
