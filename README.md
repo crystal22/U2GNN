@@ -49,7 +49,7 @@ Regarding the supervised U2GAN:
 
 	U2GAN$ python train_U2GAN_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_dro05_1024_8_idx0_4_1
 	
-	U2GAN$ python train_U2GAN_Sup.py --dataset PTC --batch_size 4 --degree_as_tag --ff_hidden_size 1024 --fold_idx 0 --num_neighbors 16 --num_sampled 512 --num_epochs 50 --num_hidden_layers 1 --learning_rate 0.0001 --model_name PTC_bs4_fold0_dro05_1024_16_idx0_1_2
+	U2GAN$ python train_U2GAN_Sup.py --dataset PTC --batch_size 4 --degree_as_tag --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 16 --num_sampled 512 --num_epochs 50 --num_hidden_layers 3 --learning_rate 0.0005 --model_name PTC_bs4_fold1_dro05_1024_16_idx0_3_1
 	
 **Parameters:** 
 
