@@ -17,6 +17,9 @@ U2GAN is free for non-commercial use and distributed under the Creative Commons 
 	<img src="https://github.com/daiquocnguyen/U2GAN/blob/master/U2GAN.png">
 </p>
 
+## Important contribution
+To the best of our knowledge, our work is the first to show that a unsupervised model can noticeably outperform up-to-date supervised approaches by a large margin. Therefore, we suggest that future GNN works should pay more attention to the unsupervised fashion as well as not comparing supervised models with unsupervised models together. 
+
 ## Usage
 
 ### Requirements
