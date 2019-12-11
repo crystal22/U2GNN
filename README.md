@@ -1,6 +1,6 @@
 ## U2GNN: Unsupervised Universal Self-Attention Network for Graph Classification
 
-This program provides the implementation of our unsupervised graph embedding model U2GNN as described in [the paper]():
+This program provides the implementation of our unsupervised graph embedding model U2GNN as described in [the paper](https://arxiv.org/pdf/1909.11855.pdf):
 
         @article{Nguyen2019U2GNN,
           author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
