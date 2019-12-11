@@ -31,7 +31,7 @@ To the best of our knowledge, our work is the first consideration of using the u
 
 ### Training
 
-Regarding the unsupervised U2GNN:
+Regarding our unsupervised U2GNN:
 
 	$ git clone https://github.com/cjlin1/liblinear.git
 	
@@ -49,7 +49,7 @@ Regarding the unsupervised U2GNN:
 	
 	U2GNN$ python train_u2GAN_noPOS.py --dataset DD --batch_size 512 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_hidden_layers 3 --learning_rate 0.00005 --model_name DD_bs512_dro05_1024_4_idx0_3_3
 
-Regarding the supervised U2GNN:
+Regarding our supervised U2GNN:
 
 	U2GNN$ python train_U2GAN_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_hidden_layers 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_dro05_1024_8_idx0_4_1
 	
