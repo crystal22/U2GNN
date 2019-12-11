@@ -18,7 +18,8 @@ U2GNN is free for non-commercial use and distributed under the Creative Commons 
 </p>
 
 ## Main contribution
-We consider a novel strategy of using the unsupervised training setting to train a GNN-based model for the graph classification task where node feature and global information will be incorporated. To the best of our knowledge, our work is the first showing that a unsupervised model can noticeably outperform up-to-date supervised models by a large margin. Therefore, we suggest that future GNN works should pay more attention to the unsupervised training setting. This is important in both industry and academic applications in reality where expanding unsupervised models is more suitable due to the limited availability of class labels.
+To the best of our knowledge, our work is the first consideration of using the unsupervised training setting to train a GNN-based model for the graph classification task where node feature and global information will be incorporated. We show that a unsupervised model can noticeably outperform up-to-date supervised models by a large margin. Therefore, we suggest that future GNN works should pay more attention to the unsupervised training setting. This is important in both industry and academic applications in reality where expanding unsupervised models is more suitable due to the limited availability of class labels.
+
 
 ## Usage
 
