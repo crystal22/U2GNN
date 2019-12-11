@@ -26,7 +26,7 @@ We consider a novel strategy of using the unsupervised training setting to train
 - Python 3
 - Tensorflow >= 1.13
 - Tensor2tensor >= 1.9
-- LIBLINEAR https://www.csie.ntu.edu.tw/~cjlin/liblinear/
+- LIBLINEAR
 
 ### Training
 
