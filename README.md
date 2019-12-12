@@ -25,8 +25,8 @@ To the best of our knowledge, our work is the first consideration of using the u
 
 ### Requirements
 - Python 3
-- Tensorflow >= 1.13
-- Tensor2tensor >= 1.9
+- Tensorflow 1.14
+- Tensor2tensor 1.13
 - LIBLINEAR
 
 ### Training
