@@ -25,10 +25,12 @@ To the best of our knowledge, our work is the first consideration of using the u
 ## Usage
 
 ### Requirements
-- Python 3
-- Tensorflow 1.14
+- Python 	3
+- Tensorflow 	1.14
 - Tensor2tensor 1.13
 - LIBLINEAR
+- Networkx 	2.3
+- Scikit-learn	0.21.2
 
 ### Training
 
