@@ -18,10 +18,6 @@ This program provides the implementation of our U2GNN as described in [the paper
 	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GAN.png">
 </p>
 
-## Main contribution
-To the best of our knowledge, our work is the first consideration of using the unsupervised training setting to train a GNN-based model for the graph classification task where node feature and global information will be incorporated. We show that a unsupervised model can noticeably outperform up-to-date supervised models by a large margin. Therefore, we suggest that future GNN works should pay more attention to the unsupervised training setting. This is important in both industry and academic applications in reality where expanding unsupervised models is more suitable due to the limited availability of class labels.
-
-
 ## Usage
 
 ### Requirements
@@ -77,6 +73,10 @@ Regarding our supervised U2GNN:
 See command examples in `command_examples.txt` and `u2GAN_scripts.zip` for the unsupervised U2GNN; and `u2GAN_scripts_NoPOS_Supervised.zip` for the supervised U2GNN.
 
 Only use `train_u2GAN_noPOS_REDDIT.py` and `eval_REDDIT.py` for a large collection of graphs such as REDDIT if having OOM or problems with Tensorflow when running `train_u2GAN_noPOS.py`. See `reddit_commands.txt`. 
+
+## Main contribution
+
+To the best of our knowledge, our work is the first consideration of using the unsupervised training setting to train a GNN-based model for the graph classification task where node feature and global information will be incorporated. We show that a unsupervised model can noticeably outperform up-to-date supervised models by a large margin. Therefore, we suggest that future GNN works should pay more attention to the unsupervised training setting. This is important in both industry and academic applications in reality where expanding unsupervised models is more suitable due to the limited availability of class labels.
 
 ## License  
 Please cite the paper whenever U2GNN is used to produce published results or incorporated into other software. As a free open-source implementation, U2GNN is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. All other warranties including, but not limited to, merchantability and fitness for purpose, whether express, implied, or arising by operation of law, course of dealing, or trade usage are hereby disclaimed. I believe that the programs compute what I claim they compute, but I do not guarantee this. The programs may be poorly and inconsistently documented and may contain undocumented components, features or modifications. I make no guarantee that these programs will be suitable for any application.
