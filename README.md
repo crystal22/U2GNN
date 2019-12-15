@@ -8,6 +8,7 @@
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/daiquocnguyen/U2GNN">
 <a href="https://github.com/daiquocnguyen/U2GNN/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/daiquocnguyen/U2GNN"></a>
 <a href="https://github.com/daiquocnguyen/U2GNN/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daiquocnguyen/U2GNN"></a>
+<img alt="GitHub" src="https://img.shields.io/github/license/daiquocnguyen/U2GNN">
 
 This program provides the implementation of our U2GNN as described in [the paper](https://arxiv.org/pdf/1909.11855.pdf):
 
