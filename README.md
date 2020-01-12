@@ -19,7 +19,7 @@ This program provides the implementation of our U2GNN as described in [the paper
           journal={arXiv preprint arXiv:1909.11855},
           year={2019}
           }
-To the best of our knowledge, our work is the first consideration of using the unsupervised training setting to train a GNN-based model for the graph classification task where node feature and global information will be incorporated. 
+To the best of our knowledge, our work is the first consideration of using the unsupervised training setting to train a GNN-based model for the graph classification task. 
 
 <p align="center">
 	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GAN.png">
