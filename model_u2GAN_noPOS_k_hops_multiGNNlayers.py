@@ -5,8 +5,8 @@ import UT_NoPOS
 epsilon = 1e-9
 
 class u2GAN(object):
-    def __init__(self, num_hidden_layers, vocab_size, feature_dim_size, hparams_batch_size,
-                 ff_hidden_size, initialization, num_sampled, seq_length, k_num_GNN_layers=1):
+    def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, initialization, num_sampled,
+                 seq_length, num_hidden_layers=2, k_num_GNN_layers=2):
         # Placeholders for input, output
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
         self.input_y = tf.compat.v1.placeholder(tf.int32, [None, 1], name="input_y")
@@ -33,9 +33,8 @@ class u2GAN(object):
 
         #
         for layer in range(k_num_GNN_layers):  # the number k of GNN layers, each GNN layer includes a number of self-attention layers
-            # Whether using Transformer Encoder or Universal Transformer Encoder
+            # Universal Transformer Encoder
             self.ute = UT_NoPOS.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
-            #self.ute = transformer.TransformerEncoder(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
             self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]
             self.output_UT = tf.squeeze(self.output_UT, axis=2)
             #
@@ -48,7 +47,6 @@ class u2GAN(object):
         with tf.name_scope("embedding"):
             self.embedding_matrix = tf.compat.v1.get_variable(
                     "W", shape=[vocab_size, feature_dim_size], initializer=tf.contrib.layers.xavier_initializer())
-
             self.softmax_biases = tf.Variable(tf.zeros([vocab_size]))
 
         self.total_loss = tf.reduce_mean(

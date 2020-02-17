@@ -5,8 +5,8 @@ import UT_NoPOS
 epsilon = 1e-9
 
 class U2GAN(object):
-    def __init__(self, num_hidden_layers, feature_dim_size, hparams_batch_size, ff_hidden_size,
-                 seq_length, num_classes, k_num_GNN_layers=1):
+    def __init__(self, feature_dim_size, hparams_batch_size, ff_hidden_size,
+                 seq_length, num_classes, num_hidden_layers=2, k_num_GNN_layers=2):
         # Placeholders for input, output
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
         self.graph_pool = tf.compat.v1.placeholder(tf.float32, [None, None], name="graph_pool")
@@ -28,22 +28,11 @@ class U2GAN(object):
         self.hparams.use_target_space_embedding = False
         self.hparams.pos = None
 
-        #Universal Transformer Encoder
-        self.ute = UT_NoPOS.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
-        self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]
-        self.output_UT = tf.squeeze(self.output_UT, axis=2)
-
-        self.output_target_node = tf.split(self.output_UT, num_or_size_splits=seq_length, axis=1)[0]
-        self.output_target_node = tf.squeeze(self.output_target_node, axis=1)
-        #graph pooling
-        self.graph_embeddings = tf.compat.v1.matmul(self.graph_pool, self.output_target_node)
-        #self.graph_embeddings = tf.nn.dropout(self.graph_embeddings, keep_prob=self.dropout_keep_prob)
-
+        #Construct k GNN layers
         self.scores = 0
         for layer in range(k_num_GNN_layers):  # the number k of GNN layers, each GNN layer includes a number of self-attention layers
-            # Whether using Transformer Encoder or Universal Transformer Encoder
+            # Universal Transformer Encoder
             self.ute = UT_NoPOS.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
-            # self.ute = transformer.TransformerEncoder(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
             self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]
             self.output_UT = tf.squeeze(self.output_UT, axis=2)
             #
@@ -56,7 +45,7 @@ class U2GAN(object):
             self.graph_embeddings = tf.compat.v1.matmul(self.graph_pool, self.output_target_node)
             self.graph_embeddings = tf.nn.dropout(self.graph_embeddings, keep_prob=self.dropout_keep_prob)
 
-            # similar to concatenate graph representations from all GNN layers
+            # Concatenate graph representations from all GNN layers
             with tf.variable_scope("layer_%d" % layer):
                 W = tf.compat.v1.get_variable(shape=[feature_dim_size, num_classes],
                                               initializer=tf.contrib.layers.xavier_initializer(),
@@ -64,9 +53,8 @@ class U2GAN(object):
                 b = tf.Variable(tf.zeros([num_classes]))
                 self.scores += tf.compat.v1.nn.xw_plus_b(self.graph_embeddings, W, b)
 
-        # Final (unnormalized) scores and predictions
+        # Final predictions
         self.predictions = tf.argmax(self.scores, 1, name="predictions")
-
         # Calculate mean cross-entropy loss
         with tf.name_scope("loss"):
             losses = tf.compat.v1.nn.softmax_cross_entropy_with_logits_v2(logits=self.scores, labels=label_smoothing(self.one_hot_labels))
