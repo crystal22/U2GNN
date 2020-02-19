@@ -1,12 +1,12 @@
 import tensorflow as tf
-import UT_NoPOS
+from tensor2tensor.models import universal_transformer
 #from tensor2tensor.models import transformer
 
 epsilon = 1e-9
 
 class u2GAN(object):
     def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, initialization, num_sampled,
-                 seq_length, num_hidden_layers=2, k_num_GNN_layers=2):
+                 seq_length, num_hidden_layers=2, k_num_GNN_layers=1):
         # Placeholders for input, output
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
         self.input_y = tf.compat.v1.placeholder(tf.int32, [None, 1], name="input_y")
@@ -21,7 +21,7 @@ class u2GAN(object):
         self.input_UT = tf.nn.l2_normalize(self.input_UT, axis=2)
         self.input_UT = tf.reshape(self.input_UT, [-1, seq_length, 1, feature_dim_size])
 
-        self.hparams = UT_NoPOS.universal_transformer_small1()
+        self.hparams = universal_transformer.universal_transformer_small()
         self.hparams.hidden_size = feature_dim_size
         self.hparams.batch_size = hparams_batch_size * seq_length
         self.hparams.max_length = seq_length
@@ -30,11 +30,15 @@ class u2GAN(object):
         self.hparams.filter_size = ff_hidden_size
         self.hparams.use_target_space_embedding = False
         self.hparams.pos = None
+        self.hparams.add_position_timing_signal = False
+        self.hparams.add_step_timing_signal = False
+        self.hparams.add_sru = False
+        self.hparams.add_or_concat_timing_signal = None
 
         #
         for layer in range(k_num_GNN_layers):  # the number k of GNN layers, each GNN layer includes a number of self-attention layers
             # Universal Transformer Encoder
-            self.ute = UT_NoPOS.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
+            self.ute = universal_transformer.UniversalTransformerEncoder(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
             self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]
             self.output_UT = tf.squeeze(self.output_UT, axis=2)
             #
