@@ -8,7 +8,7 @@ tf.compat.v1.set_random_seed(123456789)
 import os
 import time
 import datetime
-from model_U2GAN_Sup import U2GAN
+from model_U2GAN_Sup_k_hops_multiGNNlayers import U2GAN
 import pickle as cPickle
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from scipy.sparse import coo_matrix
