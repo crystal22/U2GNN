@@ -33,7 +33,7 @@ parser.add_argument("--allow_soft_placement", default=True, type=bool, help="All
 parser.add_argument("--log_device_placement", default=False, type=bool, help="Log placement of ops on devices")
 parser.add_argument("--model_name", default='IMDBBINARY', help="")
 parser.add_argument('--num_sampled', default=32, type=int, help='')
-parser.add_argument("--dropout_keep_prob", default=0.5, type=float, help="Dropout keep probability")
+parser.add_argument("--dropout_keep_prob", default=1.0, type=float, help="Dropout keep probability")
 parser.add_argument("--num_hidden_layers", default=4, type=int, help="Number of attention layers")
 parser.add_argument("--num_heads", default=1, type=int, help="Number of attention heads within each attention layer")
 parser.add_argument("--ff_hidden_size", default=128, type=int, help="The hidden size for the feedforward layer")

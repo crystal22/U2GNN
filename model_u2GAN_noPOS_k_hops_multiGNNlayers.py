@@ -6,7 +6,7 @@ epsilon = 1e-9
 
 class u2GAN(object):
     def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, initialization, num_sampled,
-                 seq_length, num_hidden_layers=2, k_num_GNN_layers=1):
+                 seq_length, num_hidden_layers, k_num_GNN_layers=1):
         # Placeholders for input, output
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
         self.input_y = tf.compat.v1.placeholder(tf.int32, [None, 1], name="input_y")
@@ -44,7 +44,7 @@ class u2GAN(object):
             #
             self.output_target_node = tf.split(self.output_UT, num_or_size_splits=seq_length, axis=1)[0]
             self.output_target_node = tf.squeeze(self.output_target_node, axis=1)
-            # new input for GNN hidden layer
+            #input for next GNN hidden layer
             self.input_UT = tf.nn.embedding_lookup(self.output_target_node, self.input_x)
             self.input_UT = tf.reshape(self.input_UT, [-1, seq_length, 1, feature_dim_size])
 
