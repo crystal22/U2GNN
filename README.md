@@ -28,7 +28,7 @@ To the best of our knowledge, our work is the first consideration of using the u
 ## Usage
 
 ### Requirements
-- Python 	3
+- Python 	3.6
 - Tensorflow 	1.14
 - Tensor2tensor 1.13
 - LIBLINEAR
